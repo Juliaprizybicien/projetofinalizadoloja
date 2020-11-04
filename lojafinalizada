@@ -1,1 +1,473 @@
+#include<stdio.h>
+#define TAM 5
+/*
+Linha 0 = feminino
+Linha 1 = masculino
+Linha 2 = infantil
+*/
+struct loja
+{
+    int codigo, valor;
+    char tamanho[20], modelo[30], genero[30], marca[30];
+
+}roupa[3][TAM];
+
+void apresentacao()
+{
+    system("cls");
+    printf("(1) Inserir nova peca de roupa\n");
+    printf("(2) Consultar peca em estoque\n");
+    printf("(3) Editar peca\n");
+    printf("(4) Remover peca\n");
+     printf("(5) calculadora basica de compra \n");
+     printf("(6) calculadora de condicao de pagamento  \n");
+    printf("(7) Sair\n");
+}
+
+void add(int i, int j)
+{
+    system("cls");
+    fflush(stdin);
+    printf("Digite o modelo da roupa\n");
+    gets(roupa[i][j].modelo);
+    system("cls");
+    printf("Digite o genero da roupa\n");
+    gets(roupa[i][j].genero);
+    system("cls");
+    printf("Digite a marca\n");
+    gets(roupa[i][j].marca);
+    system("cls");
+    printf("Digite o tamanho em letras\n");
+    gets(roupa[i][j].tamanho);
+    system("cls");
+    printf("Digite o codigo de estoque\n");
+    scanf("%d", &roupa[i][j].codigo);
+    system("cls");
+    printf("Digite o valor\n");
+    scanf("%d", &roupa[i][j].valor);
+    system("cls");
+}
+
+void mostrar(int i, int j)
+{
+    system("cls");
+    printf("modelo da roupa: %s \n", roupa[i][j].modelo);
+    printf("genero da roupa: %s \n", roupa[i][j].genero);
+    printf("marca da roupa: %s \n", roupa[i][j].marca);
+    printf("tamanho da roupa: %s \n", roupa[i][j].tamanho);
+    printf("codigo de estoque: %d \n", roupa[i][j].codigo);
+    printf("valor da peca: %d \n", roupa[i][j].valor);
+}
+
+void edicao(int i, int j)
+{
+    system("cls");
+    fflush(stdin);
+    printf("modelo da roupa\n");
+    gets(roupa[i][j].modelo);
+    system("cls");
+    printf("Digite o genero da roupa\n");
+    gets(roupa[i][j].genero);
+    system("cls");
+    printf("Digite a marca da roupa\n");
+    gets(roupa[i][j].marca);
+    system("cls");
+    printf("Digite o tamanho da roupa\n");
+    gets(roupa[i][j].tamanho);
+    system("cls");
+    printf("Digite o codigo de estoque\n");
+    scanf("%d", &roupa[i][j].codigo);
+    system("cls");
+    printf("Digite o valor\n");
+    scanf("%d", &roupa[i][j].valor);
+    system("cls");
+}
+float multiplicar (float x, float y)
+{
+    float resmulti;
+    resmulti=x*y;
+    return (resmulti);
+}
+    float somar (float x, float y)
+{
+    float ressoma;
+    ressoma=x+y;
+    return(ressoma);
+}
+     float dividir (float x,float y)
+{
+    float resdivi;
+    resdivi= x/y;
+    return (resdivi);
+}
+    float subtrair (float x,float y)
+{
+     float ressub;
+    ressub= x-y;
+    return(ressub);
+}
+int forma (int valor, int venda)
+{
+    float res;
+        switch(valor){
+
+  case 1:
+        res=venda-(venda/10);
+          break;
+
+    case 2:
+         res=venda-(venda/20);
+           break;
+
+
+    case 3:
+         res=venda;
+           break;
+
+
+    case 4:
+       res=venda +(venda*0.05);
+           break;
+
+
+   case 5:
+          res=venda-(venda/12.5);
+           break;
+
+
+    case 6:
+         res=venda-(venda/14.3);
+           break;
+
+        }
+        return (res);
+  }
+
+
+main()
+{
+char name[30], l;
+int i, j, flag[3][TAM], opcao, dual, id, cont=0, edit, k, u;
+for(i=0;i<3;i++)
+{
+    for(j=0;j<TAM;j++)
+    {
+        flag[i][j]=0;
+    }
+
+}
+do
+{
+system("cls");
+k=0;
+apresentacao();
+scanf(" %d", &opcao);
+switch(opcao)
+{
+    case(1): /* Adicionar */
+    {
+do{
+    system("cls");
+    printf("Selecao de adicao de estoque de roupas \n");
+    printf(" (0) feminino \n (1) masculino \n (2) infantil \n");
+    scanf("%d", &i);
+    system("cls");
+        for(j=0;j<TAM;j++)
+        {
+            if(flag[i][j]==0)
+            {
+            add(i, j);
+            flag[i][j]++;
+            k++;
+            break;
+            }
+        }
+        if(k==TAM-1)
+        {
+            printf("Todos os registros  estao ocupados, apague um para que possa adicionar mais \n");
+            printf("\nDigite qualquer coisa... \n");
+            printf("%c", &l);
+        }
+        printf("Deseja adicionar mais alguma outra peca? Digite (1) para sim ou (2) para nao \n");
+        scanf(" %d", &cont);
+}while(cont==1);
+break;
+    }
+
+    case(2): /*Consultar */
+    {
+
+do{
+system("cls");
+printf("Selecao de consulta de estoque de roupas \n");
+printf(" (0) feminino \n (1) masculino \n (2) infantil \n");
+scanf("%d", &i);
+system("cls");
+printf("Deseja achar a peca indicando seu codigo ou seu modelo? Digite (1) para codigo ou (2) para modelo \n");
+scanf("%d", &dual);
+system("cls");
+        switch(dual)
+        {
+            case(1):
+            {
+                for(j=0;j<TAM;j++)
+                {
+                    if(flag[i][j]==1)
+                    {
+                        printf("%d \n", roupa[i][j].codigo);
+                    }
+                }
+                printf("Digite o codigo da peca: ");
+                scanf( "%d", &id);
+                system("cls");
+                for(j=0;j<TAM;j++)
+                {
+                    if(id==roupa[i][j].codigo && flag[i][j]==1)
+                    {
+                        mostrar(i, j);
+                        k++;
+                        break;
+                    }
+                }
+                if(k==0)
+                {
+                    printf("Nao existe essa peca, tente novamente \n");
+                    break;
+                }
+                break;
+            }
+
+            case(2):
+            {
+                for(j=0;j<TAM;j++)
+                {
+                    if(flag[i][j]==1)
+                    {
+                        printf("%s \n", roupa[i][j].modelo);
+                    }
+                }
+                 printf("Digite o modelo da peca: \n");
+                 fflush(stdin);
+                gets(name);
+                system("cls");
+                for(j=0;j<TAM;j++)
+                {
+                    if(strcmp(name,roupa[i][j].modelo)==0)
+                    {
+                        mostrar(i, j);
+                        k++;
+                        break;
+                    }
+                }
+                if(k==0)
+                {
+                    printf("Nao existe essa peca, tente novamente \n");
+                    break;
+                }
+            break;
+            }
+            default:
+            {
+             printf("Opcao nao valida \n");
+             cont=1;
+             break;
+            }
+        }
+    printf("Deseja consultar outra peca? Digite (1) para sim ou (2) para nao \n");
+    scanf("%d", &cont);
+    }while(cont==1);
+break;
+    }
+
+    case(3): /*Editar */
+    {
+    do{
+system("cls");
+printf("Digite qual dos registros voce gostaria de editar \n");
+    for(i=0;i<3;i++)
+    {
+        for(j=0;j<TAM;j++)
+        {
+            if(i==0 && flag[i][j]==1)
+            {
+            printf("%d (feminino) \n", roupa[i][j].codigo);
+            }
+
+            if(i==1&& flag[i][j]==1)
+            {
+            printf("%d (masculino) \n", roupa[i][j].codigo);
+            }
+
+            if(i==2&& flag[i][j]==1)
+            {
+            printf("%d (infantil) \n", roupa[i][j].codigo);
+            }
+
+
+        }
+    printf("\n");
+    }
+
+    scanf("%d", &edit);
+     for(i=0;i<3;i++)
+    {
+        for(j=0;j<TAM;j++)
+        {
+            if(edit==roupa[i][j].codigo)
+            {
+                edicao(i, j);
+                k++;
+            }
+        }
+    }
+    if(k==0)
+    {
+        printf("Nao existe essa peca \n");
+        break;
+    }
+printf("Deseja editar outro registro? Digite (1) para sim, ou (2) para nao \n");
+scanf("%d", &cont);
+        }while(cont==1);
+break;
+    }
+
+    case(4): /*Remover */
+    {
+    do{
+    k=0;
+    u=0;
+    system("cls");
+    printf("Selecao de consulta de estoque de roupas \n");
+    printf(" (0) feminino \n (1) masculino \n (2) infantil \n");
+    scanf("%d", &i);
+    system("cls");
+    for(j=0;j<TAM;j++)
+    {
+        if(flag[i][j]==1)
+        {
+        k++;
+        }
+    }
+     if(k==0)
+        {
+            printf("Nao existem roupas no estoque \n");
+            printf("Digite qualquer coisa... \n");
+            fflush(stdin);
+            scanf("%c", &l);
+            break;
+        }
+    printf("Selecione qual das pecas voce deseja remover do estoque \n");
+        for(j=0;j<TAM;j++)
+        {
+        if(flag[i][j]==1)
+        {
+        printf("%d \n", roupa[i][j].codigo);
+        }
+        }
+printf("\n");
+        scanf("%d", &edit);
+        for(j=0;j<TAM;j++)
+        {
+            if(flag[i][j]==1 && edit==roupa[i][j].codigo)
+            {
+            printf("peca removida! \n \n");
+            flag[i][j]=0;
+            u++;
+            }
+        }
+        if(u==0)
+            {
+                printf("peca nao encontrada!");
+            }
+printf("Deseja remover outro registro? Digite (1) para sim, ou (2) para nao \n");
+scanf("%d", &cont);
+        }while(cont==1);
+    break;
+    }
+
+    case(7):
+    {
+    system("cls");
+    printf("Obrigado por utilizar nossa plataforma de lojas \n");
+    cont=5;
+    break;
+    }
+
+    default:
+    {
+     system("cls");
+     printf("Codigo nao encontrado, tente novamente \n");
+     break;
+    }
+     case(5):
+    {
+        do{
+    system("cls");
+    float x, y, fimmulti, fimsoma, fimdiv, fimsub;
+   printf("Por favor digite o primeiro valor\n");
+   scanf("%f", &x);
+    printf("Por favor digite outro valor \n");
+    scanf("%f", &y);
+
+
+    fimmulti=multiplicar(x, y);
+    printf("a multiplicacao eh %.2f \n", fimmulti);
+    fimsoma=somar (x, y);
+    printf("a soma eh %.2f \n", fimsoma);
+    fimdiv=dividir (x, y);
+    printf("a divisao eh %.2f \n", fimdiv);
+    fimsub=subtrair (x, y);
+    printf("a subtracao eh %.2f \n", fimsub);
+    cont=5;
+    printf("Deseja calcular outro valor? Digite (1) para sim, ou (2) para nao \n");
+scanf("%d", &cont);
+        }while(cont==1);
+    break;
+    }
+     case(6):
+    {
+        do{
+    system("cls");
+   int valor, venda;
+ 	float fim;
+
+ 	printf("Por favor indique o valor da venda em preco em reais:  ");
+ 	scanf("%d", &venda);
+
+   printf("\n 1 - Venda a vista - desconto de 10%%.");
+   printf("\n 2 - Venda a prazo 30 dias - desconto de 5%%.");
+   printf("\n 3 - Venda a prazo 60 dias - mesmo preco.");
+   printf("\n 4 - Venda a prazo 90 dias - acrescimo de 5%%.");
+   printf("\n 5 - Venda com cartao de debito - desconto de 8%%.");
+   printf("\n 6 - Venda com cartao de credito - desconto de 7%%.");
+   printf("\n Escolha:  ");
+   scanf("%d", &valor);
+   fim=forma(valor, venda);
+if (valor==1)
+   printf("Voce escolheu venda a vista, o valor com desconto eh: %2.f \n", fim);
+  else if (valor==2)
+   printf("Voce escolheu venda a prazo 30 dias, o valor com desconto eh: %f \n ", fim);
+ else if (valor==3)
+    printf("Voce escolheu venda a prazo 60 dias, o valor com desconto eh: %f \n ", fim);
+else if (valor==4)
+    printf("Voce escolheu venda a prazo 90 dias, o valor com acrescimo eh: %f  \n ", fim);
+  else if (valor==5)
+    printf("Voce escolheu venda com cartao de debito, o valor com desconto eh: %2.f \n", fim);
+ else if (valor==6)
+  printf("Voce escolheu venda com cartao de credito, o valor com desconto eh: %2.f \n ", fim);
+ else
+    printf("ocorreu um erro");
+    cont=5;
+    printf("Deseja calcular outro valor? Digite (1) para sim, ou (2) para nao \n");
+scanf("%d", &cont);
+        }while(cont==1);
+    break;
+    }
+}
+
+
+}while(cont!=5);
+
+
+}
 
